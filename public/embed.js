@@ -4,7 +4,7 @@
  * Cara embed di website lain:
  * 
  * 1. Tambahkan script ini:
- *    <script src="https://YOUR-DOMAIN.com/embed.js"></script>
+ *    <script src="https://quran-app.kajianislamsangatta.com/embed.js"></script>
  * 
  * 2. Tambahkan container:
  *    <div id="quran-digital-widget"></div>
@@ -24,7 +24,7 @@
 
   // Base URL where the Quran Digital app is hosted
   // Change this to your actual deployment URL
-  var BASE_URL = window.QURAN_DIGITAL_BASE_URL || 'https://your-domain.com';
+  var BASE_URL = window.QURAN_DIGITAL_BASE_URL || 'https://quran-app.kajianislamsangatta.com';
 
   var defaultOptions = {
     target: '#quran-digital-widget',
