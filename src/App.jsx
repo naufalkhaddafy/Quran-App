@@ -56,7 +56,7 @@ const App = () => {
         navigator.mediaSession.metadata = new MediaMetadata({
           title: `${audioState.surahData.namaLatin} - Ayat ${ayatData.nomorAyat}`,
           artist: qoriName,
-          album: 'Quran Digital',
+          album: 'Al-Qur\'an App - Kajian Islam Sangatta',
           artwork: [
             { src: '/logo.png', sizes: '96x96', type: 'image/png' },
             { src: '/logo.png', sizes: '128x128', type: 'image/png' },
