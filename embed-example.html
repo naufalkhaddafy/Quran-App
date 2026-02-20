@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contoh Embed - Quran Digital Widget</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #f1f5f9;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+    h1 { color: #1e293b; margin-bottom: 8px; }
+    p { color: #64748b; margin-bottom: 32px; }
+    .embed-code {
+      background: #1e293b;
+      color: #94a3b8;
+      padding: 20px;
+      border-radius: 12px;
+      font-family: monospace;
+      font-size: 13px;
+      max-width: 600px;
+      width: 100%;
+      margin-top: 32px;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .embed-code .tag { color: #f472b6; }
+    .embed-code .attr { color: #7dd3fc; }
+    .embed-code .val { color: #86efac; }
+    .embed-code .comment { color: #475569; }
+  </style>
+</head>
+<body>
+
+  <h1>🕌 Quran Digital Widget</h1>
+  <p>Contoh embed widget di website lain</p>
+
+  <!-- Widget Container - Ini yang ditaruh di website -->
+  <div id="quran-digital-widget"></div>
+
+  <!-- Embed Script -->
+  <!-- Ganti BASE_URL dengan URL deployment kamu -->
+  <script>
+    window.QURAN_DIGITAL_BASE_URL = 'http://localhost:5173';
+  </script>
+  <script src="http://localhost:5173/embed.js"></script>
+
+  <div class="embed-code">
+<span class="comment">&lt;!-- Cara 1: Auto (taruh di website kamu) --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">id</span>=<span class="val">"quran-digital-widget"</span><span class="tag">&gt;&lt;/div&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://YOUR-DOMAIN.com/embed.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+
+<span class="comment">&lt;!-- Cara 2: Custom size --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">id</span>=<span class="val">"my-widget"</span><span class="tag">&gt;&lt;/div&gt;</span>
+<span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="val">"https://YOUR-DOMAIN.com/embed.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;script&gt;</span>
+  QuranDigital.init({
+    target: '#my-widget',
+    width: '100%',
+    maxWidth: '400px',
+    height: '750px'
+  });
+<span class="tag">&lt;/script&gt;</span>
+  </div>
+
+</body>
+</html>
