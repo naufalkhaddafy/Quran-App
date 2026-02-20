@@ -6,6 +6,7 @@ import HijriCalendarView from './views/HijriCalendarView';
 import DoaView from './views/DoaView';
 import MiniPlayer from './components/MiniPlayer';
 import NavBtn from './components/NavBtn';
+import { QORI_OPTIONS } from './data/qoriOptions';
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
@@ -48,6 +49,29 @@ const App = () => {
     if (src) {
       audio.src = src;
       audio.play().catch(e => console.log("Play interrupted", e));
+
+      // Update Lock Screen Metadata
+      if ('mediaSession' in navigator) {
+        const qoriName = QORI_OPTIONS.find(q => q.id === audioState.qoriID)?.name || 'Qori';
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: `${audioState.surahData.namaLatin} - Ayat ${ayatData.nomorAyat}`,
+          artist: qoriName,
+          album: 'Quran Digital',
+          artwork: [
+            { src: '/favicon.svg', sizes: '96x96', type: 'image/svg+xml' },
+            { src: '/favicon.svg', sizes: '128x128', type: 'image/svg+xml' },
+            { src: '/favicon.svg', sizes: '192x192', type: 'image/svg+xml' },
+            { src: '/favicon.svg', sizes: '256x256', type: 'image/svg+xml' },
+            { src: '/favicon.svg', sizes: '384x384', type: 'image/svg+xml' },
+            { src: '/favicon.svg', sizes: '512x512', type: 'image/svg+xml' },
+          ]
+        });
+
+        navigator.mediaSession.setActionHandler('play', () => audio.play());
+        navigator.mediaSession.setActionHandler('pause', () => audio.pause());
+        navigator.mediaSession.setActionHandler('stop', handleStopAudio);
+      }
+
       const handleEnded = () => {
         const isLastAyat = audioState.currentAyatIdx + 1 >= audioState.surahData.ayat.length;
         const isNotAnNas = audioState.surahData.nomor < 114;
