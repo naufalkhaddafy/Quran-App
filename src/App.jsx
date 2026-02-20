@@ -49,10 +49,29 @@ const App = () => {
       audio.src = src;
       audio.play().catch(e => console.log("Play interrupted", e));
       const handleEnded = () => {
-        setAudioState(prev => {
-          if (prev.currentAyatIdx + 1 < prev.surahData.ayat.length) return { ...prev, currentAyatIdx: prev.currentAyatIdx + 1 };
-          else return { ...prev, currentAyatIdx: -1 };
-        });
+        const isLastAyat = audioState.currentAyatIdx + 1 >= audioState.surahData.ayat.length;
+        const isNotAnNas = audioState.surahData.nomor < 114;
+
+        if (!isLastAyat) {
+          setAudioState(prev => ({ ...prev, currentAyatIdx: prev.currentAyatIdx + 1 }));
+        } else if (isNotAnNas) {
+          // Surah finished, fetch next surah
+          const nextNum = audioState.surahData.nomor + 1;
+          fetch(`https://equran.id/api/v2/surat/${nextNum}`)
+            .then(res => res.json())
+            .then(data => {
+              if (data.code === 200) {
+                setAudioState(prev => ({
+                  ...prev,
+                  surahData: data.data,
+                  currentAyatIdx: 0
+                }));
+              }
+            });
+        } else {
+          // Finished An-Nas or no more surahs
+          handleStopAudio();
+        }
       };
       audio.addEventListener('ended', handleEnded);
       return () => audio.removeEventListener('ended', handleEnded);
