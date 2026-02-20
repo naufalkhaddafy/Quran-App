@@ -44,7 +44,7 @@ const QuranView = ({ audioState, onPlayAudio, onStopAudio, activeSurah, setActiv
     <div className="flex flex-col">
       <div className="sticky top-0 bg-white z-10 pt-4 pb-3 px-4 space-y-3 shadow-[0_2px_8px_-2px_rgba(0,0,0,0.08)]">
         <div className="flex items-center gap-3">
-          <img src="/favicon.svg" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm" />
+          <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm" />
           <h2 className="text-2xl font-bold text-slate-800">Al-Quran</h2>
         </div>
         {lastRead && !search && (

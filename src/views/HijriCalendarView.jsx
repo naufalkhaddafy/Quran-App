@@ -83,7 +83,7 @@ const HijriCalendarView = () => {
   return (
     <div className="flex flex-col h-full pb-24 px-4 pt-4">
       <div className="flex items-center justify-center gap-3 mb-6">
-        <img src="/favicon.svg" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm" />
+        <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm" />
         <h2 className="text-2xl font-bold text-slate-800 text-center">Kalender Hijriyah</h2>
       </div>
 

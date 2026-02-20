@@ -24,7 +24,7 @@ const DoaView = () => {
     <div className="flex flex-col h-full pb-24">
       <div className="sticky top-0 bg-white z-10 pt-4 px-4 pb-2">
         <div className="flex items-center gap-3 mb-4">
-          <img src="/favicon.svg" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm" />
+          <img src="/logo.png" alt="Logo" className="w-8 h-8 rounded-lg shadow-sm" />
           <h2 className="text-2xl font-bold text-slate-800">Kumpulan Doa</h2>
         </div>
         <div className="flex bg-slate-100 p-1 rounded-xl">
