@@ -9,7 +9,10 @@ import NavBtn from './components/NavBtn';
 
 const App = () => {
   const [activeTab, setActiveTab] = useState('home');
-  const [location, setLocation] = useState(null);
+  const [location, setLocation] = useState(() => {
+    const saved = localStorage.getItem('user_location');
+    return saved ? JSON.parse(saved) : null;
+  });
   const [activeSurah, setActiveSurah] = useState(null);
   const [jumpToAyat, setJumpToAyat] = useState(null);
   const [audioState, setAudioState] = useState({ surahData: null, currentAyatIdx: -1, qoriID: '05' });
@@ -17,12 +20,25 @@ const App = () => {
 
   useEffect(() => {
     audioRef.current = new Audio();
-    if ("geolocation" in navigator) navigator.geolocation.getCurrentPosition(
-      (p) => setLocation({ latitude: p.coords.latitude, longitude: p.coords.longitude }),
-      (e) => console.log(e)
-    );
+    // Only auto-detect if no location is saved
+    if (!location && "geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (p) => {
+          const newLoc = { latitude: p.coords.latitude, longitude: p.coords.longitude, source: 'gps' };
+          setLocation(newLoc);
+          localStorage.setItem('user_location', JSON.stringify(newLoc));
+        },
+        (e) => console.log("Location denied or error", e)
+      );
+    }
     return () => { if (audioRef.current) { audioRef.current.pause(); } };
   }, []);
+
+  useEffect(() => {
+    if (location) {
+      localStorage.setItem('user_location', JSON.stringify(location));
+    }
+  }, [location]);
 
   useEffect(() => {
     const audio = audioRef.current;
